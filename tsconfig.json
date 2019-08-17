@@ -8,6 +8,13 @@
       "dom",
       "es2015"
     ],
+    "types": [
+      "node"
+  ],
+  "typeRoots": [
+      "node_modules/@types"
+  ],
+  
     "module": "es2015",
     "moduleResolution": "node",
     "sourceMap": true,
@@ -25,4 +32,5 @@
   "atom": {
     "rewriteTsconfig": false
   }
+  
 }
