@@ -87,7 +87,7 @@ async sendConfig()
 {
   var headers = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, HEAD', "Access-Control-Allow-Headers": "Access-Control-*, Origin, X-Requested-With, Content-Type, Accept",}
  
-  axios.post('http://169.254.52.217:8000/setSchedule/', this.schedule, headers)
+  axios.post('http://localhost:8000/setSchedule/', this.schedule, headers)
   .then(function (response) {
     console.log(response);
   })
@@ -100,7 +100,7 @@ async sendConfig()
 async viewConfig() {
   try {
   
-    const response = await axios.get('http://169.254.52.217:8000/viewConfig/', {//RETURN JSON ARRAY OF SLOTS
+    const response = await axios.get('http://localhost:8000/viewConfig/', {//RETURN JSON ARRAY OF SLOTS
      
     });
     this.schedule=response;
@@ -113,7 +113,7 @@ async viewConfig() {
 async testPhoto(){
   try {
   
-    const response = await axios.get('http://169.254.52.217:8000/testPhoto/', {//RETURN JSON ARRAY OF SLOTS
+    const response = await axios.get('http://localhost:8000/testPhoto/', {//RETURN JSON ARRAY OF SLOTS
     });
     this.testPic=response;
     console.log(response);
