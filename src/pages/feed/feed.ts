@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, Header } from 'ionic-angular';
 import firebase from 'firebase';
 import moment, { duration } from 'moment';
 import { isDifferent } from '@angular/core/src/render3/util';
@@ -82,27 +82,40 @@ addSlot()
   this.printedschedule=JSON.stringify(this.schedule);
 
 }
-
+headers = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS, POST', "Access-Control-Allow-Headers": "Access-Control-*,",}
+ 
 async sendConfig()
 {
-  var headers = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, HEAD', "Access-Control-Allow-Headers": "Access-Control-*, Origin, X-Requested-With, Content-Type, Accept",}
- 
-  axios.post('http://localhost:8000/setSchedule/', this.schedule, headers)
-  .then(function (response) {
-    console.log(response);
+  
+  axios({
+    method: 'post',
+    url: 'http://192.168.1.2:8000/setSchedule',
+    //withCredentials: true, // True otherwise I receive another error
+    headers: this.headers,
+    data: this.schedule,
+  }).then(response => {
+    console.log('Logout ', response);
   })
-  .catch(function (error) {
-    console.log(error);
-  });
+  
+  // axios.post('http://169.254.52.217:8000/setSchedule/', this.schedule, headers)
+  // .then(function (response) {
+  //   console.log(response);
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
 }
 
-  
 async viewConfig() {
   try {
   
-    const response = await axios.get('http://localhost:8000/viewConfig/', {//RETURN JSON ARRAY OF SLOTS
-     
-    });
+    //const response = await axios.get('http://169.254.52.217:8000/viewConfig', {});
+    const response = await axios({
+      method: 'get',
+      url: 'http://192.168.1.2:8000/viewConfig',
+      headers: this.headers,
+    })
+      
     this.schedule=response;
     console.log(response);
   } catch (error) {
@@ -113,8 +126,12 @@ async viewConfig() {
 async testPhoto(){
   try {
   
-    const response = await axios.get('http://localhost:8000/testPhoto/', {//RETURN JSON ARRAY OF SLOTS
-    });
+    //const response = await axios.get('http://169.254.52.217:8000/testPhoto', Headers, {});
+    const response = await axios({
+      method: 'get',
+      url: 'http://192.168.1.2:8000/testPhoto',
+      headers: this.headers,
+    })
     this.testPic=response;
     console.log(response);
   } catch (error) {
