@@ -35,7 +35,8 @@ export class FeedPage {
   all_locations: any;
   endDate: string;
   startTime: any;
-  endTime: any;
+  endTime: any = new Date();
+  screenlog:any;
   testPic: any;
   timeslot: string;
   schedule: any = [];
@@ -47,9 +48,10 @@ export class FeedPage {
   ShutterTime: number;
   location:number;
   today: string = new Date().toISOString(); // minimum date = current date
-  startDate: string = new Date().toISOString();
+  startDate: string;
   min_end_date: string = this.startDate;
   maxDate: string = new Date(new Date().getFullYear(), new Date().getMonth() + 3, new Date().getDate()).toISOString(); // max date = 3 months from today
+  feedlog: string;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController, 
     public toastCtrl: ToastController, private camera: Camera, private imagePicker: ImagePicker, private geolocation: Geolocation) {
@@ -62,34 +64,27 @@ addSlot()
 
   var tempslot = {
 
-
-    // startDate : this.startDate,
-    // endDate : this.endDate,
-    // startTime : this.startTime,
-    // endTime : this.endDate,
-    start: this.startDate,
-    stop: this.startTime,
+    start: this.startDate.substring(0,this.startDate.length -10)+"-"+this.startDate.substring(11,this.startDate.length -1),//remove Z  
+    stop: this.endDate.substring(0,this.endDate.length -10)+"-"+this.endDate.substring(11,this.endDate.length -1),//remove Z  
     iso: this.ISOTime,
     frequency: this.intervalTime,
     shutter_speed: this.ShutterTime,
     video: this.photovid,
-
   }
 
   this.timeslot=JSON.stringify(tempslot)
-
   this.schedule.push(tempslot);
   this.printedschedule=JSON.stringify(this.schedule);
 
 }
-headers = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS, POST', "Access-Control-Allow-Headers": "Access-Control-*,",}
+headers = {'Access-Control-Allow-Origin': 'localhost, *', 'Access-Control-Allow-Methods': 'GET, OPTIONS, POST', "Access-Control-Allow-Headers": "Access-Control-*,",}
  
 async sendConfig()
 {
   
   axios({
     method: 'post',
-    url: 'http://192.168.1.2:8000/setSchedule',
+    url: 'http://192.168.5.1:8000/setSchedule',
     //withCredentials: true, // True otherwise I receive another error
     headers: this.headers,
     data: this.schedule,
@@ -112,11 +107,15 @@ async viewConfig() {
     //const response = await axios.get('http://169.254.52.217:8000/viewConfig', {});
     const response = await axios({
       method: 'get',
-      url: 'http://192.168.1.2:8000/viewConfig',
+      url: 'http://192.168.5.1:8000/viewConfig',
       headers: this.headers,
     })
       
-    this.schedule=response;
+    this.schedule=response.data;
+    if(this.schedule.error!=null)
+    {
+      this.feedlog="No Config Exists. Please set a configuration first.";
+    }
     console.log(response);
   } catch (error) {
     console.error(error);
@@ -129,17 +128,36 @@ async testPhoto(){
     //const response = await axios.get('http://169.254.52.217:8000/testPhoto', Headers, {});
     const response = await axios({
       method: 'get',
-      url: 'http://192.168.1.2:8000/testPhoto',
+      url: 'http://192.168.5.1:8000/testPhoto',
       headers: this.headers,
     })
-    this.testPic=response;
+    var base64Data=response.data;
+    //console.log(base64Data)
+    
+
+    // const bytes: string = atob(base64Data);
+    //   const byteNumbers = new Array(bytes.length);
+    //   for (let i = 0; i < bytes.length; i++) {
+    //     byteNumbers[i] = bytes.charCodeAt(i);
+    //   }
+    //   const byteArray = new Uint8Array(byteNumbers);
+
+    //   const blob: Blob = new Blob([byteArray], { type: 'image/png' });
+
+    //   this.testPic= blob;
+    // var b64 = window.btoa(unescape(encodeURIComponent(base64Data)))
+    // console.log(b64);
+    // this.testPic=b64;
+
+  
+
     console.log(response);
   } catch (error) {
-    console.error(error);
+    console.error(error); 
   }
 
 }
-
+  
 
 
 

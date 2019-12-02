@@ -46,6 +46,7 @@
     "cors": "^2.8.5",
     "es6-promise-plugin": "4.2.2",
     "firebase": "^5.7.0",
+    "firebase-tools": "^7.7.0",
     "geolib": "^2.0.24",
     "grpc": "^1.17.0",
     "ionic": "^4.9.0",

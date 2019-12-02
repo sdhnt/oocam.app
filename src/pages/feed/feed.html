@@ -34,6 +34,8 @@
   <ion-row >
    
 <!-- IDEALLY FILE NAME IS AUTOSET -->
+
+{{feedlog}}
   </ion-row>
 
 
@@ -51,8 +53,8 @@
       <ion-label>Start date:</ion-label>
       <ion-datetime 
       required
-      displayFormat="YYYY-MM-DDTHH:mm:ssTZD" 
-      pickerFormat="DD-MMM-YYYYTHH:mm:ssTZD" 
+      displayFormat="YYYY-MM-DD-HH:mm:ss" 
+      pickerFormat="YYYY-MM-DD-HH:mm:ss" 
       [(ngModel)]="startDate"
       [min]="today"
       [max]="maxDate"
@@ -65,8 +67,8 @@
       <ion-label>End date:</ion-label>
       <ion-datetime 
       required
-      displayFormat="YYYY-MM-DDTHH:mm:ssTZD" 
-      pickerFormat="YYYY-MM-DDTHH:mm:ssTZD" 
+      displayFormat="YYYY-MM-DD-HH:mm:ss" 
+      pickerFormat="YYYY-MM-DD-HH:mm:ss" 
       [(ngModel)]="endDate"
       [min]="today"
       [max]="maxDate"></ion-datetime>
@@ -170,7 +172,7 @@
   <button padding ion-button block round style="margin-top: 10px;" (click)="testPhoto()" class="uploadButton"> Test Picture </button>
 
   <ion-card>
-    {{testPic}}
+    <ion-img [src]="testPic"></ion-img> 
   </ion-card>
 </ion-content>
 </ion-content>
