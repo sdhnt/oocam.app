@@ -56,7 +56,6 @@
       displayFormat="YYYY-MM-DD-HH:mm:ss" 
       pickerFormat="YYYY-MM-DD-HH:mm:ss" 
       [(ngModel)]="startDate"
-      [min]="today"
       [max]="maxDate"
       [(ngModel)]="startDate">
     </ion-datetime>
@@ -70,7 +69,6 @@
       displayFormat="YYYY-MM-DD-HH:mm:ss" 
       pickerFormat="YYYY-MM-DD-HH:mm:ss" 
       [(ngModel)]="endDate"
-      [min]="today"
       [max]="maxDate"></ion-datetime>
     </ion-item>
    
@@ -121,6 +119,7 @@
         <ion-item>
             <ion-label >ISO Setting</ion-label>
             <ion-select value="100" [(ngModel)]="ISOTime">
+              <ion-option value="0" >Auto</ion-option>
               <ion-option value="100" >ISO 100</ion-option>
               <ion-option value="200">ISO 200</ion-option>
               <ion-option value="400">ISO 400</ion-option>
@@ -131,18 +130,16 @@
             <ion-item>
                 <ion-label>Shutter Speed</ion-label>
                 <ion-select value="200" [(ngModel)]="ShutterTime">
-                    <ion-option value="20">20</ion-option>
-                    <ion-option value="50">50</ion-option>
-                  <ion-option value="100">100</ion-option>
-                  <ion-option value="200">200</ion-option>
-                  <ion-option value="400">400</ion-option>
-                  <ion-option value="800">800</ion-option>
-                  <ion-option value="1000">1000</ion-option>
+              
+                    <ion-option value="50000">1/20</ion-option>
+                    <ion-option value="20000">1/50</ion-option>
+                  <ion-option value="10000">1/100</ion-option>
+                  <ion-option value="5000">1/200</ion-option>
+                  <ion-option value="2500">1/400</ion-option>
+                  <ion-option value="1250">1/800</ion-option>
+                  <ion-option value="1000">1/1000</ion-option>
                 </ion-select>
                 </ion-item>
-        
-
-
 
 
     <!-- HAS TO CHECK IF ATLEAST 1 LOC & TIMES IS ENTERED BEFORE POST -->
@@ -172,7 +169,7 @@
   <button padding ion-button block round style="margin-top: 10px;" (click)="testPhoto()" class="uploadButton"> Test Picture </button>
 
   <ion-card>
-    <ion-img [src]="testPic"></ion-img> 
+    <ion-img width="400" height="400" [src]="testPic"></ion-img> 
   </ion-card>
 </ion-content>
 </ion-content>
