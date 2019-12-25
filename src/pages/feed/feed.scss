@@ -2,10 +2,9 @@ page-feed {
     ion-header{
         ion-navbar{
             div.toolbar-background{
-                 background-image: url("…/../../../assets/imgs/bckground.png");
-                 background-repeat: no-repeat;
-                 background-size:cover;
-                 text-align: center;
+                background-color: #226699ff;
+                color: white;
+                font-family: Monoton;  
             }
 
             ion-title{
@@ -22,12 +21,9 @@ page-feed {
     }
 
         .TopBar{
-            background-image: url("…/../../../assets/imgs/bckground.png") ;
-	        -webkit-background-size: cover;
-  	        -moz-background-size: cover;
-  	        -o-background-size: cover;
-        	background-size: cover;
-            color: #ffffff;
+            background-color: #226699ff;
+        color: black;
+        font-family: Monoton;  
             font-family: Monoton;
             text-align: left;
         
@@ -48,12 +44,8 @@ page-feed {
     }
     .uploadButton{
         align-content: center;
-        background-image: url("…/../../../assets/imgs/bckground.png") ;
-        -webkit-background-size: cover;
-          -moz-background-size: cover;
-          -o-background-size: cover;
-        background-size: cover;
-        color: #ffffff;
+        background-color: #226699ff;
+        color: white;
         font-family: Monoton;   
     }
     .bottom-bar{
