@@ -80,7 +80,7 @@ addSlot()
     if(this.photovid==null){
       this.alertCtrl.create({
         title: "Error",
-        message: "Either Photo or Video mode must be selected"
+        message: "Either Photo or video mode must be selected"
       }).present()
       return;
     }
@@ -88,12 +88,11 @@ addSlot()
   console.log(vid)
 
   if(this.photovid=="false"){
- 
     if(this.ISOTime==undefined ||this.ShutterTime==undefined || this.intervalTime==undefined){
    
         this.alertCtrl.create({
           title: "Error",
-          message: "Please fill in all the fields"
+          message: "Please fill in all the fields (ISO, Shutter, Interval)"
         }).present()
         return;
     }
