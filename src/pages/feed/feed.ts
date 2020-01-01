@@ -67,7 +67,7 @@ addSlot()
   {
     this.alertCtrl.create({
       title: "Error",
-      message: "End time must be after start time"
+      message: "End time must be greater than start time"
     }).present()
     return;
   }
@@ -80,7 +80,7 @@ addSlot()
     if(this.photovid==null){
       this.alertCtrl.create({
         title: "Error",
-        message: "Mode must be selected"
+        message: "Either Photo or Video mode must be selected"
       }).present()
       return;
     }
@@ -96,7 +96,6 @@ addSlot()
           message: "Please fill in all the fields"
         }).present()
         return;
-      
     }
   }
   var tempslot = {
