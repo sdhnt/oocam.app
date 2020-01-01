@@ -189,7 +189,8 @@
     </ion-list>
 
 
-  <ion-card>
+  <ion-card *ngIf="testPic!=null || testPic!=undefined">
+    <button ion-button (click)="closetestimg()"><ion-icon name="close"></ion-icon></button>
     <ion-img width="400" height="400" [src]="testPic"></ion-img> 
   </ion-card>
 </ion-content>
