@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 
 // const cors = require('cors')({origin: true});
 const axios = require('axios');
@@ -40,7 +40,9 @@ export class FeedPage {
   feedlog: string;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController, 
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    ) {
       
   }
 
@@ -49,16 +51,54 @@ export class FeedPage {
  
 addSlot()
 {
-  console.log(this.photovid);
-  
+  if(this.startDate==null || this.endDate == null){
+    this.alertCtrl.create({
+      title: "Error",
+      message: "Need to Specify Start and End Time",
+      buttons: [{
+        text: 'OK',
+        role: 'cancel'
+      },
+      ]
+    }).present()
+    return;
+  }
+  if(this.startDate>=this.endDate)
+  {
+    this.alertCtrl.create({
+      title: "Error",
+      message: "End time must be after start time"
+    }).present()
+    return;
+  }
+
   var vid;
   if(this.photovid=="true"){
     vid=true;
-  }else{
+  }else{ //its a photo
     vid=false;
+    if(this.photovid==null){
+      this.alertCtrl.create({
+        title: "Error",
+        message: "Mode must be selected"
+      }).present()
+      return;
+    }
   }
   console.log(vid)
-  
+
+  if(this.photovid=="false"){
+ 
+    if(this.ISOTime==undefined ||this.ShutterTime==undefined || this.intervalTime==undefined){
+   
+        this.alertCtrl.create({
+          title: "Error",
+          message: "Please fill in all the fields"
+        }).present()
+        return;
+      
+    }
+  }
   var tempslot = {
 
     start: this.startDate.substring(0,this.startDate.length -10)+"-"+this.startDate.substring(11,this.startDate.length -1),//remove Z  
@@ -194,6 +234,15 @@ async testPhoto(){
     console.error(error); 
   }
 
+}
+
+remitem(tempslot){
+  
+  this.schedule.forEach((element, index) => {
+    if(element=tempslot){
+      this.schedule.splice(index, 1);
+    }
+  });
 }
   
 

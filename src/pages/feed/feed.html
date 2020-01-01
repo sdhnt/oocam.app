@@ -6,7 +6,7 @@
           
       <!-- TOP HEADING -->
       	
-      <button ion-button icon-only clear (click)="logout()" end>
+      <button ion-button icon-only clear end>
           <ion-icon name="side-menu"></ion-icon> 
           <!-- This is currently a blank icon to keep the text in the center -->
         </button>
@@ -30,7 +30,7 @@
  
 
 
-  <ion-card class="setcard" padding>
+
   <ion-row >
    
 <!-- IDEALLY FILE NAME IS AUTOSET -->
@@ -69,6 +69,7 @@
       displayFormat="YYYY-MM-DD-HH:mm:ss" 
       pickerFormat="YYYY-MM-DD-HH:mm:ss" 
       [(ngModel)]="endDate"
+      [min]="startDate"
       [max]="maxDate"></ion-datetime>
     </ion-item>
    
@@ -103,6 +104,9 @@
       <ion-option value="true">Video</ion-option>
     </ion-select>
     </ion-item>
+
+
+<div *ngIf="photovid=='false'">
 
     <ion-item>
         <ion-label>Interval Setting</ion-label>
@@ -141,35 +145,57 @@
                 </ion-select>
                 </ion-item>
 
-
-    <!-- HAS TO CHECK IF ATLEAST 1 LOC & TIMES IS ENTERED BEFORE POST -->
-
+              </div>
   </ion-list>
-  <!-- IDEALLY WE SHOW A DEMO OF THE AD ON A CAB -->
 
-  <ion-row margin class="rowStyle" *ngIf="image">
-    <ion-card class="round-corners">
-      <img [src]="image" class="round-corners">
-    </ion-card>
-  </ion-row>
+  <button padding ion-button block full style="margin-top: 10px;" (click)="addSlot()" class="uploadButton"> Add this slot  </button>
 
-</ion-card> 
   
 <ion-content padding>
-  <button padding ion-button block round style="margin-top: 10px;" (click)="addSlot()" class="uploadButton"> Add this slot  </button>
-  <ion-card>
-    {{printedschedule}}
+    <ion-list *ngFor="let tempslot of schedule">
+      <ion-card padding>
+        <ion-grid>
+        
+            <ion-row>
+              <ion-col col-6>
+              {{tempslot.start}}
+            </ion-col>
+            <ion-col col-6>
+              {{tempslot.video?"Video":("Photo, ISO:" +tempslot.iso)}} 
+            </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+              {{tempslot.stop}}
+            </ion-col>
+            <ion-col col-6>
+              {{tempslot.video?"":("Freq: "+tempslot.frequency+" Shutter: "+ tempslot.shutter_speed/1000000)}}
+            </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <button ion-button full class="uploadButton" (click)="remitem(tempslot)">Remove</button>
+              </ion-col>
+              <!-- <ion-col col-6>
+                <button ion-button full class="uploadButton">Repeat Daily</button>
+              </ion-col> -->
+            </ion-row>
+      
+            
 
-    <br>
-    Timeslot: {{timeslot}}
-  </ion-card>
-  <!-- Clear the screen after checkout + Toast -->
-  <button padding ion-button block round style="margin-top: 10px;" (click)="sendConfig()" class="uploadButton"> Send Data via WiFi </button>
-  <button padding ion-button block round style="margin-top: 10px;" (click)="viewConfig()" class="uploadButton"> View Set Configuration </button>
-  <button padding ion-button block round style="margin-top: 10px;" (click)="testPhoto()" class="uploadButton"> Test Picture </button>
+        </ion-grid>
+      
+      </ion-card>
+    </ion-list>
+
 
   <ion-card>
     <ion-img width="400" height="400" [src]="testPic"></ion-img> 
   </ion-card>
 </ion-content>
 </ion-content>
+<ion-footer>
+  <button padding ion-button block full style="margin-top: 10px;" (click)="sendConfig()" class="uploadButton"> Send Data via WiFi </button>
+  <button padding ion-button block full style="margin-top: 10px;" (click)="viewConfig()" class="uploadButton"> View Set Configuration </button>
+  <button padding ion-button block full style="margin-top: 10px;" (click)="testPhoto()" class="uploadButton"> Test Picture </button>
+</ion-footer>
