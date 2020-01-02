@@ -22,6 +22,12 @@
 
 </ion-header>
 
+<!-- <ion-tabs tabsPlacement="top" #myTabs>
+  <ion-tab [root]="ViewList" tabTitle="{{'Stock'|translate}}" tabIcon="list-box"></ion-tab>
+  <ion-tab [root]="AddProd" tabTitle="{{'Add Product'|translate}}" tabIcon="pricetag"></ion-tab>
+  <ion-tab [root]="AddCat" tabTitle="{{'Add Category'|translate}}" tabIcon="albums"></ion-tab>
+ </ion-tabs> -->
+
 <ion-content>
 
     
@@ -32,22 +38,10 @@
 
 
   <ion-row >
-   
-<!-- IDEALLY FILE NAME IS AUTOSET -->
-
 {{feedlog}}
   </ion-row>
-
-
-<!-- Extra button for upload -->
-    <!-- <button ion-button icon-only color="danger" clear (click)="post()">
-        <ion-icon name="send"></ion-icon>
-      </button> --> 
-
-
-  
+ 
   <ion-list required>
-
 
     <ion-item required>
       <ion-label>Start date:</ion-label>

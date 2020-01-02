@@ -197,8 +197,9 @@ export class FeedPage {
     }).then(response => {
       console.log('Logout ', response.data.success);
       this.feedlog = "Success";
+      this.alertCtrl.create({title: "Success", message:"Schedule Successfully Set!"}).present()
     }).catch(() => {
-      console.log('No Response ');
+      this.alertCtrl.create({title: "Error", message:"No Response"}).present()
     })
 
     // axios.post('http://169.254.52.217:8000/setSchedule/', this.schedule, headers)
@@ -218,15 +219,21 @@ export class FeedPage {
         method: 'get',
         url: 'http://192.168.5.1:8000/viewConfig',
         headers: this.headers,
+        timeout: 5000,
       })
 
-      this.schedule = response.data;
-      if (this.schedule.error != null) {
-        this.feedlog = "No Config Exists. Please set a configuration first.";
+      var temp= response.data;
+    
+      if (temp.error != null) {
+        this.alertCtrl.create({title: "Result", message:"No Config Exists. Please set a configuration first."}).present();
       }
-      console.log(response);
+      else{
+        this.schedule=response.data;
+      }
+      //console.log(response);
     } catch (error) {
-      console.error(error);
+      this.alertCtrl.create({title: "View Config Error", message:error}).present();
+      
     }
   }
 
@@ -242,12 +249,13 @@ export class FeedPage {
         method: 'get',
         url: 'http://192.168.5.1:8000/testPhoto',
         headers: this.headers,
+        timeout: 5000,
       })
       var base64Data = response.data;
       this.testPicvar=1;
       
       this.testPic = "data:image/jpeg;base64," + base64Data;
-      let TIME_IN_MS = 1000;
+    
 
       
       //console.log(base64Data)
@@ -272,6 +280,7 @@ export class FeedPage {
       console.log(response);
     } catch (error) {
       console.error(error);
+      this.alertCtrl.create({title: "Test Photo Error", message:error}).present();
     }
 
   }
