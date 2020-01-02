@@ -24,6 +24,7 @@ export class FeedPage {
   endTime: any = new Date();
   screenlog: any;
   testPic: any;
+  testPicvar= 1;
   timeslot: string;
   schedule: any = [];
   printedschedule: any;
@@ -47,6 +48,13 @@ export class FeedPage {
   }
 
   timezone = 8;
+
+  ionViewDidLoad(){
+    this.testPicvar=1;
+   setTimeout( () => {
+      this.testPicvar=0;
+    }, 2000);
+  }
 
 
   addSlot() {
@@ -137,7 +145,16 @@ export class FeedPage {
 
   headers = { 'Access-Control-Allow-Origin': 'localhost, *', 'Access-Control-Allow-Methods': 'GET, OPTIONS, POST', "Access-Control-Allow-Headers": "Access-Control-*,", }
 
+  
   async sendConfig() {
+
+    if(this.schedule.length<=0){
+      this.alertCtrl.create({
+        title: "Error",
+        message: "Needs to have atleast 1 slot in the schedule"
+      }).present()
+      return;
+    }
 
     var senddtt = new Date()
 
@@ -214,7 +231,7 @@ export class FeedPage {
   }
 
   closetestimg(){
-    this.testPic=null;
+    this.testPicvar=0;
   }
 
   async testPhoto() {
@@ -227,7 +244,12 @@ export class FeedPage {
         headers: this.headers,
       })
       var base64Data = response.data;
+      this.testPicvar=1;
+      
       this.testPic = "data:image/jpeg;base64," + base64Data;
+      let TIME_IN_MS = 1000;
+
+      
       //console.log(base64Data)
 
 

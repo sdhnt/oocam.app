@@ -189,12 +189,18 @@
     </ion-list>
 
 
-  <ion-card *ngIf="testPic!=null || testPic!=undefined">
-    <button ion-button (click)="closetestimg()"><ion-icon name="close"></ion-icon></button>
-    <ion-img width="400" height="400" [src]="testPic"></ion-img> 
+  <ion-card>
+    <ion-row *ngIf="testPicvar">
+      <button padding ion-button block full style="margin-top: 10px;" (click)="closetestimg()" class="uploadButton"> <ion-icon name="close"></ion-icon> </button>
+    </ion-row>
+    <ion-row>
+    <ion-img width="400" height="400" [src]="testPic" [hidden]="!testPicvar"></ion-img> 
+  </ion-row>
   </ion-card>
+
 </ion-content>
 </ion-content>
+<button padding ion-button block full style="margin-top: 10px;" (click)="syncConfig()" class="uploadButton"> Sync Time with Camera </button>
 <ion-footer>
   <button padding ion-button block full style="margin-top: 10px;" (click)="sendConfig()" class="uploadButton"> Send Data via WiFi </button>
   <button padding ion-button block full style="margin-top: 10px;" (click)="viewConfig()" class="uploadButton"> View Set Configuration </button>
