@@ -17,7 +17,7 @@ export class FeedPage {
 
 ViewList = SetConfigPage;
 AddProd = ViewConfigPage;
-AddCat = TestPicPage;
+AddCat = TestPicPage;  
 
 contactUs(){
   this.alertCtrl.create({

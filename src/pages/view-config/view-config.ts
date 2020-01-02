@@ -20,7 +20,7 @@ export class ViewConfigPage {
   text: string = "";
   posts: any[] = [];
   pageSize: number = 10;
-  cursor: any;//documentSnapshot- holds value of pageSizeth post
+  cursor: any;
   infiniteEvent: any;
   image: string;
   retrieved_images: string[] = [];
