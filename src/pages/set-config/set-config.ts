@@ -106,7 +106,7 @@ export class SetConfigPage {
         return;
       }
     }
-    console.log(vid)
+    //console.log(vid)
 
     if (this.photovid == "false") {
       if (this.ISOTime == undefined || this.ShutterTime == undefined || this.intervalTime == undefined) {
