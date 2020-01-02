@@ -199,7 +199,7 @@ export class FeedPage {
       this.feedlog = "Success";
       this.alertCtrl.create({title: "Success", message:"Schedule Successfully Set!"}).present()
     }).catch(() => {
-      this.alertCtrl.create({title: "Error", message:"No Response"}).present()
+      this.alertCtrl.create({title: "Error", message:"No Response. Please check if you are connected to the OOCAM through Wi-Fi!"}).present()
     })
 
     // axios.post('http://169.254.52.217:8000/setSchedule/', this.schedule, headers)
@@ -232,8 +232,12 @@ export class FeedPage {
       }
       //console.log(response);
     } catch (error) {
+
+      if(error=="Error: timeout of 5000ms exceeded"){
+        error=error+"."+'\n' +"Check if you are connected to the OOCAM via Wi-Fi!"
+      }
       this.alertCtrl.create({title: "View Config Error", message:error}).present();
-      
+  
     }
   }
 
@@ -255,31 +259,16 @@ export class FeedPage {
       this.testPicvar=1;
       
       this.testPic = "data:image/jpeg;base64," + base64Data;
-    
-
-      
-      //console.log(base64Data)
-
-
-      // const bytes: string = atob(base64Data);
-      //   const byteNumbers = new Array(bytes.length);
-      //   for (let i = 0; i < bytes.length; i++) {
-      //     byteNumbers[i] = bytes.charCodeAt(i);
-      //   }
-      //   const byteArray = new Uint8Array(byteNumbers);
-
-      //   const blob: Blob = new Blob([byteArray], { type: 'image/png' });
-
-      //   this.testPic= blob;
-      // var b64 = window.btoa(unescape(encodeURIComponent(base64Data)))
-      // console.log(b64);
-      // this.testPic=b64;
-
 
 
       console.log(response);
     } catch (error) {
       console.error(error);
+      
+      // Please check if you are connected to the OOCAM through Wi-Fi!
+      if(error=="Error: timeout of 5000ms exceeded"){
+        error=error+"."+'\n' +"Check if you are connected to the OOCAM via Wi-Fi!"
+      }
       this.alertCtrl.create({title: "Test Photo Error", message:error}).present();
     }
 
