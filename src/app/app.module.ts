@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { FeedPage } from '../pages/feed/feed';
+import { SetConfigPage } from '../pages/set-config/set-config';
+import { ViewConfigPage } from '../pages/view-config/view-config';
+import { TestPicPage } from '../pages/test-pic/test-pic';
 
 
 // import firebase from 'firebase';
@@ -26,6 +29,9 @@ import { FeedPage } from '../pages/feed/feed';
   declarations: [
     MyApp,
     FeedPage,
+    SetConfigPage,
+    ViewConfigPage,
+    TestPicPage,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,9 @@ import { FeedPage } from '../pages/feed/feed';
   entryComponents: [
     MyApp,
     FeedPage,
-    
+    SetConfigPage,
+    ViewConfigPage,
+    TestPicPage,
   ],
   providers: [
     StatusBar,

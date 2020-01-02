@@ -1,32 +1,21 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController, AlertController, Tabs } from 'ionic-angular';
-import { SetConfigPage } from '../set-config/set-config';
-import { ViewConfigPage } from '../view-config/view-config';
-import { TestPicPage } from '../test-pic/test-pic';
-
-// const cors = require('cors')({origin: true});
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 const axios = require('axios');
+/**
+ * Generated class for the ViewConfigPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
-
+@IonicPage()
 @Component({
-  selector: 'page-feed',
-  templateUrl: 'feed.html',
+  selector: 'page-view-config',
+  templateUrl: 'view-config.html',
 })
-export class FeedPage {
-  @ViewChild("myTabs") tabRef: Tabs;
+export class ViewConfigPage {
 
-ViewList = SetConfigPage;
-AddProd = ViewConfigPage;
-AddCat = TestPicPage;
-
-contactUs(){
-  this.alertCtrl.create({
-    title: 'Contact Support',
-    message:"Please send an email to sdhnt@connect.hku.hk along with screenshots and photographs of your issue and we will get back to you in 24 hours!"
-  }).present()
-}
-
-
+ 
   // cors = cors({origin: true});
   text: string = "";
   posts: any[] = [];
@@ -58,7 +47,7 @@ contactUs(){
   maxDate: string = new Date(new Date().getFullYear(), new Date().getMonth() + 3, new Date().getDate()).toISOString(); // max date = 3 months from today
   feedlog: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
   ) {
@@ -216,8 +205,16 @@ contactUs(){
       console.log('Logout ', response.data.success);
       this.feedlog = "Success";
       this.alertCtrl.create({title: "Success", message:"Schedule Successfully Set!"}).present()
-    }).catch(() => {
-      this.alertCtrl.create({title: "Error", message:"No Response. Please check if you are connected to the OOCAM through Wi-Fi!"}).present()
+    }).catch((error) => {
+      //"No Response. Please check if you are connected to the OOCAM through Wi-Fi!"
+      console.log(error)
+      if(error="Error: Network Error"){
+        error=error+". Please check if you are connected to the OOCAM through Wi-Fi!";
+      }
+      if(error="Error: Request failed with status code 500"){
+        error=error+"."+'\n' +"Please restart the camera and try again or contact us!"
+      }
+      this.alertCtrl.create({title: "Error", message:error,}).present()
     })
 
     // axios.post('http://169.254.52.217:8000/setSchedule/', this.schedule, headers)
@@ -254,6 +251,9 @@ contactUs(){
       if(error=="Error: timeout of 5000ms exceeded"){
         error=error+"."+'\n' +"Check if you are connected to the OOCAM via Wi-Fi!"
       }
+      if(error="Error: Request failed with status code 500"){
+        error=error+"."+'\n' +"Please restart the camera and try again or contact us!"
+      }
       this.alertCtrl.create({title: "View Config Error", message:error}).present();
   
     }
@@ -287,6 +287,9 @@ contactUs(){
       if(error=="Error: timeout of 5000ms exceeded"){
         error=error+"."+'\n' +"Check if you are connected to the OOCAM via Wi-Fi!"
       }
+      if(error="Error: Request failed with status code 500"){
+        error=error+"."+'\n' +"Please restart the camera and try again or contact us!"
+      }
       this.alertCtrl.create({title: "Test Photo Error", message:error}).present();
     }
 
@@ -300,16 +303,6 @@ contactUs(){
       }
     });
   }
-
-
-
-
-
-  editConfig() {
-
-
-  }
-
 
 
 }
