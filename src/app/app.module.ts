@@ -8,6 +8,9 @@ import { FeedPage } from '../pages/feed/feed';
 import { SetConfigPage } from '../pages/set-config/set-config';
 import { ViewConfigPage } from '../pages/view-config/view-config';
 import { TestPicPage } from '../pages/test-pic/test-pic';
+import { TestPicPageModule } from '../pages/test-pic/test-pic.module';
+import { ViewConfigPageModule } from '../pages/view-config/view-config.module';
+import { SetConfigPageModule } from '../pages/set-config/set-config.module';
 
 
 // import firebase from 'firebase';
@@ -29,13 +32,14 @@ import { TestPicPage } from '../pages/test-pic/test-pic';
   declarations: [
     MyApp,
     FeedPage,
-    SetConfigPage,
-    ViewConfigPage,
-    TestPicPage,
+    
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    SetConfigPageModule,
+    ViewConfigPageModule,
+    TestPicPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
