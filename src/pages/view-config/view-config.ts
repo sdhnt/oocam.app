@@ -88,6 +88,7 @@ export class ViewConfigPage {
     var vid;
     if (this.photovid == "true") {
       vid = true;
+
     } else { //its a photo
       vid = false;
       if (this.photovid == null) {
@@ -118,8 +119,8 @@ export class ViewConfigPage {
       frequency: parseInt(this.intervalTime),
       shutter_speed: parseInt(this.ShutterTime),
       video: vid,
-
     }
+    console.log("tempslot")
 
     var flag = 0;
 

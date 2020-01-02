@@ -93,6 +93,9 @@ export class SetConfigPage {
     var vid;
     if (this.photovid == "true") {
       vid = true;
+      this.ISOTime="0";
+      this.ShutterTime="0";
+      this.intervalTime="1";
     } else { //its a photo
       vid = false;
       if (this.photovid == null) {
@@ -125,6 +128,7 @@ export class SetConfigPage {
       video: vid,
 
     }
+    console.log(tempslot)
 
     var flag = 0;
 
