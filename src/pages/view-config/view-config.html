@@ -19,13 +19,12 @@
   <ion-list *ngFor="let tempslot of schedule">
     <ion-card padding>
       <ion-grid>
-      
           <ion-row>
             <ion-col col-6>
             {{tempslot.start}}
           </ion-col>
           <ion-col col-6>
-            {{tempslot.video?"Video":("Photo, ISO:" +tempslot.iso)}} 
+            {{tempslot.video?"Video":("Photo, ISO:" +tempslot.iso)}}, Light:{{tempslot.light}} 
           </ion-col>
           </ion-row>
           <ion-row>
@@ -36,9 +35,7 @@
             {{tempslot.video?"":("Freq: "+tempslot.frequency+" Shutter: "+ tempslot.shutter_speed/1000000)}}
           </ion-col>
           </ion-row>    
-
       </ion-grid>
-    
     </ion-card>
   </ion-list>
 

@@ -27,6 +27,33 @@ contactUs(){
 }
 
 
+WiFi(){
+  this.alertCtrl.create({
+    title: 'Turn Off OOCAM Wi-Fi',
+    message:"Click on CONFIRM below to turn off the OOCAM Wi-Fi. The camera will have to be restarted to re-connect.",
+    buttons: [{
+      text: 'Cancel',
+        role: 'cancel',
+    },{
+      text: 'CONFIRM',
+        handler: () => {
+
+          axios({
+            method: 'post',
+            url: 'http://192.168.5.1:8000/turnOffWiFi',
+            headers: this.headers,
+            data: 0,
+          }).then(response => {
+     
+            this.alertCtrl.create({title: "Success", message:"Wi-Fi Turned Off!"}).present()
+          }).catch(() => {
+            this.alertCtrl.create({title: "Error", message:"No Response. Please check if you are connected to the OOCAM through Wi-Fi!"}).present()
+          })
+        }
+    },],
+  }).present()
+}
+
   // cors = cors({origin: true});
   text: string = "";
   posts: any[] = [];

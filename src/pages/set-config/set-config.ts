@@ -37,6 +37,7 @@ export class SetConfigPage {
   screenlog: any;
   testPic: any;
   testPicvar= 1;
+  light: string;
   timeslot: string;
   schedule: any = [];
   printedschedule: any;
@@ -119,14 +120,13 @@ export class SetConfigPage {
       }
     }
     var tempslot = {
-
       start: this.startDate.substring(0, this.startDate.length - 10) + "-" + this.startDate.substring(11, this.startDate.length - 1),//remove Z  
       stop: this.endDate.substring(0, this.endDate.length - 10) + "-" + this.endDate.substring(11, this.endDate.length - 1),//remove Z  
       iso: parseInt(this.ISOTime),
       frequency: parseInt(this.intervalTime),
       shutter_speed: parseInt(this.ShutterTime),
       video: vid,
-
+      light: parseInt(this.light),
     }
     console.log(tempslot)
 
