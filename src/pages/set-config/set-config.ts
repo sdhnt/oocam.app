@@ -123,7 +123,7 @@ export class SetConfigPage {
       start: this.startDate.substring(0, this.startDate.length - 10) + "-" + this.startDate.substring(11, this.startDate.length - 1),//remove Z  
       stop: this.endDate.substring(0, this.endDate.length - 10) + "-" + this.endDate.substring(11, this.endDate.length - 1),//remove Z  
       iso: parseInt(this.ISOTime),
-      frequency: parseInt(this.intervalTime),
+      frequency: parseFloat(this.intervalTime),
       shutter_speed: parseInt(this.ShutterTime),
       video: vid,
       light: parseInt(this.light),
@@ -213,7 +213,10 @@ export class SetConfigPage {
     }).then(response => {
       console.log('Logout ', response.data.success);
       this.feedlog = "Success";
-      this.alertCtrl.create({title: "Success", message:"Schedule Successfully Set!"}).present()
+      if(response.data.success=="Success")
+        {this.alertCtrl.create({title: "Success", message:"Schedule Successfully Set!"}).present()}
+      else
+        {this.alertCtrl.create({title: "Memory Missing", message:response.data.success}).present()}
     }).catch((error) => {
       //"No Response. Please check if you are connected to the OOCAM through Wi-Fi!"
       console.log(error)

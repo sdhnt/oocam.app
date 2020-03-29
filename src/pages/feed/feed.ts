@@ -39,7 +39,7 @@ WiFi(){
         handler: () => {
 
           axios({
-            method: 'post',
+            method: 'get',
             url: 'http://192.168.5.1:8000/turnOffWiFi',
             headers: this.headers,
             data: 0,

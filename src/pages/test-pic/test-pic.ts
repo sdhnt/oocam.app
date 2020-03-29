@@ -73,18 +73,19 @@ export class TestPicPage {
   }
   async testPhoto() {
     try {
-      let params={
+      let params : any = [];
+    params.push({
         iso: parseInt(this.ISOTime),
-        shutter: parseInt(this.ShutterTime),
+        shutter_speed: parseInt(this.ShutterTime),
         light: parseInt(this.light),
-      }
+      });
       //const response = await axios.get('http://169.254.52.217:8000/testPhoto', Headers, {});
       const response = await axios({
-        method: 'get',
+        method: 'post',
         url: 'http://192.168.5.1:8000/testPhoto',
         headers: this.headers,
         data: params,
-        timeout: 5000,
+        timeout: 10000,
       })
       var base64Data = response.data;
       this.testPicvar=1;
@@ -97,11 +98,50 @@ export class TestPicPage {
       console.error(error);
       
       // Please check if you are connected to the OOCAM through Wi-Fi!
-      if(error=="Error: timeout of 5000ms exceeded"){
+      if(error=="Error: timeout of 10000ms exceeded"){
         error=error+"."+'\n' +"Check if you are connected to the OOCAM via Wi-Fi!"
       }
       if(error="Error: Request failed with status code 500"){
-        error=error+"."+'\n' +"Please restart the camera and try again or contact us!"
+        error=error+"."+'\n' +"Check your Wi-Fi or restart the camera and try again. If no solution is found, contact us!"
+      }
+      this.alertCtrl.create({title: "Test Photo Error", message:error}).present();
+    }
+
+  }
+
+  async testPhotoMem() {
+    try {
+      let params : any = [];
+    params.push({
+        iso: parseInt(this.ISOTime),
+        shutter_speed: parseInt(this.ShutterTime),
+        light: parseInt(this.light),
+      });
+      //const response = await axios.get('http://169.254.52.217:8000/testPhoto', Headers, {});
+      const response = await axios({
+        method: 'post',
+        url: 'http://192.168.5.1:8000/testPhotoMem',
+        headers: this.headers,
+        data: params,
+        timeout: 10000,
+      })
+      var result = response.data;
+      console.log("Result : "+result)
+      if(result=="SUCCESS"){
+        this.alertCtrl.create({title: "Test Successful!"}).present();
+      }
+      else{
+        this.alertCtrl.create({title: "Memory error!"}).present();
+      }
+    } catch (error) {
+      console.error(error);
+      
+      // Please check if you are connected to the OOCAM through Wi-Fi!
+      if(error=="Error: timeout of 10000ms exceeded"){
+        error=error+"."+'\n' +"Check if you are connected to the OOCAM via Wi-Fi!"
+      }
+      if(error="Error: Request failed with status code 500"){
+        error=error+"."+'\n' +"Check your Wi-Fi or restart the camera and try again. If no solution is found, contact us!"
       }
       this.alertCtrl.create({title: "Test Photo Error", message:error}).present();
     }

@@ -56,7 +56,6 @@
     <ion-item>
         <ion-label>Interval Setting</ion-label>
         <ion-select value="1" [(ngModel)]="intervalTime">
-          <ion-option value="0.5">0.5 Second</ion-option>
           <ion-option value="1">1 Second</ion-option>
           <ion-option value="2">2 second</ion-option>
           <ion-option value="3">3 second</ion-option>
@@ -67,7 +66,7 @@
 
         <ion-item>
             <ion-label >ISO Setting</ion-label>
-            <ion-select value="100" [(ngModel)]="ISOTime">
+            <ion-select value="0" [(ngModel)]="ISOTime">
               <ion-option value="0" >Auto</ion-option>
               <ion-option value="100" >ISO 100</ion-option>
               <ion-option value="200">ISO 200</ion-option>
@@ -77,7 +76,7 @@
             </ion-item>
             <ion-item>
                 <ion-label>Shutter Speed</ion-label>
-                <ion-select value="200" [(ngModel)]="ShutterTime">
+                <ion-select value="0" [(ngModel)]="ShutterTime">
                   <ion-option value="0">Auto</ion-option>
                     <ion-option value="50000">1/20</ion-option>
                     <ion-option value="20000">1/50</ion-option>
